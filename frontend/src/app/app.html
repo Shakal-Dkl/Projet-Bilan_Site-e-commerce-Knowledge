@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #00497c;">
+  <div class="container">
+    <a class="navbar-brand text-white fw-bold" routerLink="/">Knowledge Learning</a>
+    <div class="navbar-nav">
+      <a class="nav-link text-white" routerLink="/auth" routerLinkActive="active">Connexion</a>
+      <a class="nav-link text-white" routerLink="/catalog" routerLinkActive="active">Catalogue</a>
+      <a class="nav-link text-white" routerLink="/certifications" routerLinkActive="active">Certifications</a>
+      <a class="nav-link text-white" routerLink="/admin" routerLinkActive="active">Backoffice</a>
+    </div>
+  </div>
+</nav>
+
+<main class="container py-4">
+  <router-outlet></router-outlet>
+</main>
