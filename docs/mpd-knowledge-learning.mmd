@@ -1,0 +1,101 @@
+erDiagram
+    USERS {
+        int id PK
+        string email UK
+        string password_hash
+        string first_name
+        string last_name
+        enum role "admin|client|other"
+        boolean is_active
+        string activation_token UK
+        datetime created_at
+        datetime updated_at
+        string created_by
+        string updated_by
+    }
+
+    THEMES {
+        int id PK
+        string name UK
+        datetime created_at
+        datetime updated_at
+        string created_by
+        string updated_by
+    }
+
+    CURRICULUMS {
+        int id PK
+        string title
+        decimal price
+        text description
+        int theme_id FK
+        datetime created_at
+        datetime updated_at
+        string created_by
+        string updated_by
+    }
+
+    LESSONS {
+        int id PK
+        string title
+        decimal price
+        text content
+        string video_url
+        int curriculum_id FK
+        datetime created_at
+        datetime updated_at
+        string created_by
+        string updated_by
+    }
+
+    PURCHASES {
+        int id PK
+        int user_id FK
+        int curriculum_id FK "nullable"
+        int lesson_id FK "nullable"
+        decimal amount
+        string payment_provider
+        string payment_status
+        string transaction_ref UK
+        datetime created_at
+        datetime updated_at
+        string created_by
+        string updated_by
+    }
+
+    LESSON_PROGRESS {
+        int id PK
+        int user_id FK
+        int lesson_id FK
+        boolean is_validated
+        datetime validated_at
+        datetime created_at
+        datetime updated_at
+        string created_by
+        string updated_by
+    }
+
+    CERTIFICATIONS {
+        int id PK
+        int user_id FK
+        int theme_id FK
+        string title
+        datetime issued_at
+        datetime created_at
+        datetime updated_at
+        string created_by
+        string updated_by
+    }
+
+    THEMES ||--o{ CURRICULUMS : contains
+    CURRICULUMS ||--o{ LESSONS : includes
+
+    USERS ||--o{ PURCHASES : makes
+    CURRICULUMS ||--o{ PURCHASES : bought_as_full_course
+    LESSONS ||--o{ PURCHASES : bought_as_single_lesson
+
+    USERS ||--o{ LESSON_PROGRESS : validates
+    LESSONS ||--o{ LESSON_PROGRESS : tracked_in
+
+    USERS ||--o{ CERTIFICATIONS : obtains
+    THEMES ||--o{ CERTIFICATIONS : for_theme
