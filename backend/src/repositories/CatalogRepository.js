@@ -13,7 +13,7 @@ class CatalogRepository {
   }
 
   async getLessonById(id) {
-    return Lesson.findByPk(id, { include: [{ model: Curriculum, include: [Theme] }] });
+    return Lesson.findByPk(id, { include: [{ model: Curriculum, include: [Theme, Lesson] }] });
   }
 }
 

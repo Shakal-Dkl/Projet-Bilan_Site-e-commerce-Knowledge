@@ -8,30 +8,34 @@ import { AuthService } from '../core/auth.service';
   standalone: true,
   imports: [FormsModule, CommonModule],
   template: `
+    <h2 class="knowledge-page-title">Connexion et inscription</h2>
+
     <div class="row g-4">
       <div class="col-md-6">
-        <div class="knowledge-card p-3">
-          <h3>Inscription</h3>
+        <div class="knowledge-card p-4 h-100">
+          <p class="knowledge-section-label">Nouveau compte</p>
+          <h3 class="mb-3">Inscription</h3>
           <input class="form-control mb-2" placeholder="Email" [(ngModel)]="registerForm.email" />
           <input class="form-control mb-2" placeholder="Prénom" [(ngModel)]="registerForm.firstName" />
           <input class="form-control mb-2" placeholder="Nom" [(ngModel)]="registerForm.lastName" />
           <input class="form-control mb-2" type="password" placeholder="Mot de passe" [(ngModel)]="registerForm.password" />
-          <button class="btn knowledge-btn-primary text-white" (click)="register()">Créer un compte</button>
+          <button class="btn knowledge-btn-primary mt-2" (click)="register()">Créer un compte</button>
         </div>
       </div>
 
       <div class="col-md-6">
-        <div class="knowledge-card p-3">
-          <h3>Connexion</h3>
+        <div class="knowledge-card p-4 h-100">
+          <p class="knowledge-section-label">Compte existant</p>
+          <h3 class="mb-3">Connexion</h3>
           <input class="form-control mb-2" placeholder="Email" [(ngModel)]="loginForm.email" />
           <input class="form-control mb-2" type="password" placeholder="Mot de passe" [(ngModel)]="loginForm.password" />
-          <button class="btn knowledge-btn-primary text-white me-2" (click)="login()">Se connecter</button>
+          <button class="btn knowledge-btn-primary me-2 mt-2" (click)="login()">Se connecter</button>
           <button class="btn btn-outline-secondary" (click)="logout()">Se déconnecter</button>
         </div>
       </div>
     </div>
 
-    <p class="mt-3" *ngIf="message">{{ message }}</p>
+    <p class="knowledge-feedback knowledge-feedback-success" *ngIf="message">{{ message }}</p>
   `
 })
 export class AuthPageComponent {

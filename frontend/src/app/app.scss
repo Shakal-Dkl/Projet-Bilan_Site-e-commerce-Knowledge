@@ -1,0 +1,28 @@
+.knowledge-navbar {
+	background-color: #00497c;
+	border-bottom: 3px solid #0074c7;
+}
+
+.knowledge-logo {
+	height: 40px;
+	width: auto;
+	object-fit: contain;
+}
+
+.nav-link {
+	font-weight: 700;
+	border-radius: 8px;
+	padding: 0.35rem 0.65rem !important;
+	margin-left: 0.35rem;
+}
+
+.active-link {
+	background: #0074c7;
+}
+
+@media (max-width: 768px) {
+	.knowledge-logo {
+		height: 30px;
+	}
+}
+

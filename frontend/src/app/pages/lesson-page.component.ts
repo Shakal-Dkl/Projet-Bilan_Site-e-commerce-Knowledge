@@ -8,17 +8,24 @@ import { ApiService } from '../core/api.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div *ngIf="lesson" class="knowledge-card p-3">
-      <h3>{{ lesson.title }}</h3>
-      <p>{{ lesson.content }}</p>
+    <h2 class="knowledge-page-title">Espace leçon</h2>
+
+    <div *ngIf="lesson" class="knowledge-card p-4">
+      <p class="knowledge-section-label">Contenu acheté</p>
+      <h3>
+        <ng-container *ngIf="lessonNumber">Leçon n°{{ lessonNumber }} :</ng-container>
+        {{ lesson.title }}
+      </h3>
+      <p class="knowledge-muted">{{ lesson.content }}</p>
       <p><strong>Vidéo :</strong> {{ lesson.videoUrl }}</p>
-      <button class="btn knowledge-btn-primary text-white" (click)="validateLesson()">Valider cette leçon</button>
+      <button class="btn knowledge-btn-primary" (click)="validateLesson()">Valider cette leçon</button>
     </div>
-    <p class="mt-2" *ngIf="message">{{ message }}</p>
+    <p class="knowledge-feedback knowledge-feedback-success" *ngIf="message">{{ message }}</p>
   `
 })
 export class LessonPageComponent implements OnInit {
   lesson: any;
+  lessonNumber: number | null = null;
   message = '';
 
   constructor(private readonly route: ActivatedRoute, private readonly api: ApiService) {}
@@ -26,7 +33,14 @@ export class LessonPageComponent implements OnInit {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.api.get(`/lessons/${id}`).subscribe({
-      next: (result) => (this.lesson = result),
+      next: (result: any) => {
+        this.lesson = result;
+
+        const lessons = result?.Curriculum?.Lessons ?? [];
+        const orderedLessons = [...lessons].sort((a, b) => a.id - b.id);
+        const index = orderedLessons.findIndex((item) => item.id === result.id);
+        this.lessonNumber = index >= 0 ? index + 1 : null;
+      },
       error: () => (this.message = 'Accès refusé : achetez cette leçon ou son cursus.')
     });
   }

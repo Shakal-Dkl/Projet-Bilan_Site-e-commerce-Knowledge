@@ -8,25 +8,31 @@ import { ApiService } from '../core/api.service';
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
-    <h2 class="mb-3">Catalogue des formations</h2>
-    <p *ngIf="message" class="text-success">{{ message }}</p>
+    <h2 class="knowledge-page-title">Catalogue des formations</h2>
+    <p class="knowledge-feedback knowledge-feedback-success" *ngIf="message">{{ message }}</p>
 
-    <div *ngFor="let theme of themes" class="knowledge-card p-3 mb-3">
-      <h4>{{ theme.name }}</h4>
+    <div *ngFor="let theme of themes" class="knowledge-card p-3 p-md-4 mb-3">
+      <p class="knowledge-section-label">Thème</p>
+      <h4 class="mb-3 d-flex align-items-center gap-2">
+        {{ theme.name }}
+        <span class="knowledge-pill">{{ theme.Curriculums.length }} cursus</span>
+      </h4>
 
-      <div *ngFor="let c of theme.Curriculums" class="border rounded p-2 mb-2">
-        <div class="d-flex justify-content-between">
+      <div *ngFor="let c of theme.Curriculums" class="border rounded p-3 mb-2">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
           <div>
             <strong>{{ c.title }}</strong> - {{ c.price }} €
           </div>
-          <button class="btn btn-sm knowledge-btn-primary text-white" (click)="buyCurriculum(c.id)">Acheter le cursus</button>
+          <button class="btn btn-sm knowledge-btn-primary" (click)="buyCurriculum(c.id)">Acheter le cursus</button>
         </div>
 
-        <ul class="mt-2 mb-0">
-          <li *ngFor="let l of c.Lessons">
-            {{ l.title }} - {{ l.price }} €
-            <button class="btn btn-sm btn-outline-primary ms-2" (click)="buyLesson(l.id)">Acheter la leçon</button>
-            <a class="btn btn-sm btn-outline-secondary ms-2" [routerLink]="['/lessons', l.id]">Voir</a>
+        <ul class="mt-3 mb-0 list-group">
+          <li *ngFor="let l of c.Lessons; let index = index" class="list-group-item d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <span><strong>Leçon n°{{ index + 1 }}</strong> : {{ l.title }} {{ l.price }} €</span>
+            <span>
+              <button class="btn btn-sm btn-outline-primary ms-2" (click)="buyLesson(l.id)">Acheter la leçon</button>
+              <a class="btn btn-sm btn-outline-secondary ms-2" [routerLink]="['/lessons', l.id]">Voir</a>
+            </span>
           </li>
         </ul>
       </div>
