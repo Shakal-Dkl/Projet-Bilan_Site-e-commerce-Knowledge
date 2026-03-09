@@ -1,11 +1,14 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #00497c;">
+<nav class="navbar navbar-expand-lg knowledge-navbar">
   <div class="container">
-    <a class="navbar-brand text-white fw-bold" routerLink="/">Knowledge Learning</a>
-    <div class="navbar-nav">
-      <a class="nav-link text-white" routerLink="/auth" routerLinkActive="active">Connexion</a>
-      <a class="nav-link text-white" routerLink="/catalog" routerLinkActive="active">Catalogue</a>
-      <a class="nav-link text-white" routerLink="/certifications" routerLinkActive="active">Certifications</a>
-      <a class="nav-link text-white" routerLink="/admin" routerLinkActive="active">Backoffice</a>
+    <a class="navbar-brand text-white fw-bold d-flex align-items-center gap-2" routerLink="/">
+      <img src="/logo-knowledge.png" alt="Knowledge logo" class="knowledge-logo" />
+      <span>Knowledge Learning</span>
+    </a>
+    <div class="navbar-nav ms-auto">
+      <a class="nav-link text-white" routerLink="/auth" routerLinkActive="active-link">Connexion</a>
+      <a class="nav-link text-white" routerLink="/catalog" routerLinkActive="active-link">Catalogue</a>
+      <a class="nav-link text-white" routerLink="/certifications" routerLinkActive="active-link">Certifications</a>
+      <a class="nav-link text-white" routerLink="/admin" routerLinkActive="active-link">Backoffice</a>
     </div>
   </div>
 </nav>
