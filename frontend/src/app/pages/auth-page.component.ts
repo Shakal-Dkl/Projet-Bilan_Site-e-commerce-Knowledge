@@ -39,6 +39,8 @@ import { AuthService } from '../core/auth.service';
   `
 })
 export class AuthPageComponent {
+  // EN: Message area shared by register/login/logout actions.
+  // FR: Zone de message partagée par inscription/connexion/déconnexion.
   message = '';
 
   registerForm = {
@@ -56,6 +58,8 @@ export class AuthPageComponent {
   constructor(private readonly authService: AuthService) {}
 
   async register() {
+    // EN: Creates account; activation link is shown in backend console (prototype mode).
+    // FR: Crée le compte ; le lien d'activation est affiché dans la console backend (mode prototype).
     try {
       await this.authService.register(this.registerForm);
       this.message = 'Compte créé. Activez votre compte via le lien reçu (console backend).';
@@ -65,6 +69,8 @@ export class AuthPageComponent {
   }
 
   async login() {
+    // EN: Stores JWT and role in localStorage through AuthService.
+    // FR: Stocke le JWT et le rôle dans le localStorage via AuthService.
     try {
       await this.authService.login(this.loginForm);
       this.message = 'Connexion réussie.';
@@ -74,6 +80,8 @@ export class AuthPageComponent {
   }
 
   logout() {
+    // EN: Clears local session from localStorage.
+    // FR: Supprime la session locale du localStorage.
     this.authService.logout();
     this.message = 'Déconnecté.';
   }

@@ -4,6 +4,7 @@ import { CatalogPageComponent } from './pages/catalog-page.component';
 import { LessonPageComponent } from './pages/lesson-page.component';
 import { CertificationsPageComponent } from './pages/certifications-page.component';
 import { AdminPageComponent } from './pages/admin-page.component';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
 	{ path: '', redirectTo: 'catalog', pathMatch: 'full' },
@@ -11,5 +12,5 @@ export const routes: Routes = [
 	{ path: 'catalog', component: CatalogPageComponent },
 	{ path: 'lessons/:id', component: LessonPageComponent },
 	{ path: 'certifications', component: CertificationsPageComponent },
-	{ path: 'admin', component: AdminPageComponent }
+	{ path: 'admin', component: AdminPageComponent, canActivate: [adminGuard] }
 ];

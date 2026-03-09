@@ -8,7 +8,7 @@
       <a class="nav-link text-white" routerLink="/auth" routerLinkActive="active-link">Connexion</a>
       <a class="nav-link text-white" routerLink="/catalog" routerLinkActive="active-link">Catalogue</a>
       <a class="nav-link text-white" routerLink="/certifications" routerLinkActive="active-link">Certifications</a>
-      <a class="nav-link text-white" routerLink="/admin" routerLinkActive="active-link">Backoffice</a>
+      <a *ngIf="isAdminConnected" class="nav-link text-white" routerLink="/admin" routerLinkActive="active-link">Backoffice</a>
     </div>
   </div>
 </nav>
