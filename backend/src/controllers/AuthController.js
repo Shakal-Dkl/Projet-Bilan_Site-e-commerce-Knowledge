@@ -3,10 +3,11 @@ const authService = require('../services/AuthService');
 class AuthController {
   async register(req, res) {
     try {
-      const user = await authService.register(req.body);
+      const { user, activationLink } = await authService.register(req.body);
       return res.status(201).json({
         message: 'Account created. Check email to activate.',
-        userId: user.id
+        userId: user.id,
+        activationLink
       });
     } catch (error) {
       return res.status(400).json({ message: error.message });

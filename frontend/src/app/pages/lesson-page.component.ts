@@ -37,7 +37,14 @@ export class LessonPageComponent implements OnInit {
         this.lesson = result;
 
         const lessons = result?.Curriculum?.Lessons ?? [];
-        const orderedLessons = [...lessons].sort((a, b) => a.id - b.id);
+        const orderedLessons = [...lessons].sort((a, b) => {
+          const orderA = a.displayOrder ?? 999;
+          const orderB = b.displayOrder ?? 999;
+          if (orderA === orderB) {
+            return a.id - b.id;
+          }
+          return orderA - orderB;
+        });
         const index = orderedLessons.findIndex((item) => item.id === result.id);
         this.lessonNumber = index >= 0 ? index + 1 : null;
       },
