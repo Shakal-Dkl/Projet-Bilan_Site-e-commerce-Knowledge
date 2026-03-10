@@ -116,3 +116,58 @@ Police: **Comic Sans MS**
 Pour obtenir une image PNG/JPG du MPD:
 1. Ouvrir le fichier Mermaid dans VS Code.
 2. Utiliser une extension Mermaid (ou mermaid.live) pour exporter en PNG.
+
+## Déploiement gratuit (Render)
+
+### 1) Préparer le dépôt
+
+- Pousser le projet sur GitHub (repo public recommandé pour la correction).
+- Vérifier que `backend` et `frontend` sont bien dans le repo.
+
+### 2) Déployer le backend (Render Web Service)
+
+Créer un service Render avec ces paramètres:
+
+- **Root Directory**: `backend`
+- **Build Command**: `npm install`
+- **Start Command**: `npm run start`
+
+Variables d’environnement à ajouter:
+
+- `PORT=10000`
+- `APP_BASE_URL=https://<ton-backend>.onrender.com`
+- `FRONTEND_URL=https://<ton-frontend>.onrender.com`
+- `JWT_SECRET=<une-valeur-longue-et-securisee>`
+- `ENABLE_CSRF=true`
+
+Puis lancer une première initialisation de données:
+
+- Ouvrir le **Shell** Render du backend
+- Exécuter: `npm run seed`
+
+### 3) Déployer le frontend (Render Static Site)
+
+Créer un site statique Render avec:
+
+- **Root Directory**: `frontend`
+- **Build Command**: `npm install && npm run build`
+- **Publish Directory**: `dist/frontend/browser` (ou `dist/frontend` selon version Angular)
+
+### 4) Mettre à jour les URLs frontend -> backend
+
+Le frontend appelle actuellement l’API locale (`http://localhost:3000`).
+Pour le déploiement, remplacer cette URL par l’URL Render backend dans:
+
+- `frontend/src/app/core/api.service.ts`
+
+Exemple:
+
+- `https://<ton-backend>.onrender.com/api`
+
+### 5) Vérification après déploiement
+
+- Ouvrir le frontend Render
+- Tester `/catalog` (visible sans connexion)
+- Tester inscription + activation
+- Tester connexion admin (`admin@knowledge.local` / `Admin1234`)
+- Tester achat et accès leçons
