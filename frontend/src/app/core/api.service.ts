@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
 export class ApiService {
   // EN: Single API base URL for all frontend calls.
   // FR: URL de base unique pour tous les appels frontend.
-  private readonly baseUrl = 'http://localhost:3000/api';
+  private readonly baseUrl = 'https://projet-bilan-site-e-commerce-knowledge.onrender.com/api';
 
   constructor(private readonly http: HttpClient) {}
 
