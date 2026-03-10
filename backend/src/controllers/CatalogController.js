@@ -9,7 +9,7 @@ class CatalogController {
 
   async getCurriculum(req, res) {
     try {
-      const curriculum = await catalogService.getCurriculum(Number(req.params.id));
+      const curriculum = await catalogService.getCurriculum(req.params.id);
       return res.status(200).json(curriculum);
     } catch (error) {
       return res.status(404).json({ message: error.message });
@@ -18,7 +18,7 @@ class CatalogController {
 
   async getLesson(req, res) {
     try {
-      const lesson = await catalogService.getLesson(Number(req.params.id));
+      const lesson = await catalogService.getLesson(req.params.id);
 
       if (!req.user) {
         return res.status(403).json({ message: 'Login required for lesson access' });

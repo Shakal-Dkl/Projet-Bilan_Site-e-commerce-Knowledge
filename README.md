@@ -3,7 +3,7 @@
 Application e-learning/e-commerce réalisée avec:
 - **Frontend**: Angular + Bootstrap + SCSS
 - **Backend**: Node.js (Express, architecture MVC 3-tiers)
-- **Base de données**: SQLite via Sequelize (orienté objet)
+- **Base de données**: MongoDB via Mongoose
 
 ## Fonctionnalités livrées
 
@@ -171,3 +171,44 @@ Exemple:
 - Tester inscription + activation
 - Tester connexion admin (`admin@knowledge.local` / `Admin1234`)
 - Tester achat et accès leçons
+
+### 6) Template copier-coller (à remplir)
+
+Backend Render:
+
+- **Service Name**: `knowledge-learning-api`
+- **Root Directory**: `backend`
+- **Build Command**: `npm install`
+- **Start Command**: `npm run start`
+
+Variables d’environnement backend:
+
+```env
+PORT=10000
+APP_BASE_URL=https://knowledge-learning-api.onrender.com
+FRONTEND_URL=https://knowledge-learning-front.onrender.com
+JWT_SECRET=REMPLACE_PAR_UN_SECRET_LONG
+ENABLE_CSRF=true
+MONGODB_URI=mongodb://127.0.0.1:27017/knowledge_learning
+```
+
+Frontend Render (Static Site):
+
+- **Service Name**: `knowledge-learning-front`
+- **Root Directory**: `frontend`
+- **Build Command**: `npm install && npm run build`
+- **Publish Directory**: `dist/frontend/browser`
+
+Après création des services:
+
+1. Dans `frontend/src/app/core/api.service.ts`, remplacer:
+  - `http://localhost:3000/api`
+  par
+  - `https://knowledge-learning-api.onrender.com/api`
+2. Commit + push.
+3. Relancer un déploiement frontend.
+4. Ouvrir le shell backend Render et exécuter:
+
+```bash
+npm run seed
+```

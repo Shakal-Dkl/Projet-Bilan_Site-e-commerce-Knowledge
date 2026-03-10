@@ -6,19 +6,19 @@ class UserRepository {
   }
 
   async findByEmail(email) {
-    return User.findOne({ where: { email } });
+    return User.findOne({ email });
   }
 
   async findByActivationToken(token) {
-    return User.findOne({ where: { activationToken: token } });
+    return User.findOne({ activationToken: token });
   }
 
   async findById(id) {
-    return User.findByPk(id);
+    return User.findById(id);
   }
 
   async listAll() {
-    return User.findAll({ order: [['createdAt', 'DESC']] });
+    return User.find().sort({ createdAt: -1 });
   }
 }
 

@@ -1,20 +1,18 @@
-const { DataTypes } = require('sequelize');
+const mongoose = require('mongoose');
 
-module.exports = (sequelize) => {
-  const Curriculum = sequelize.define('Curriculum', {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    title: { type: DataTypes.STRING, allowNull: false },
-    displayOrder: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 1 },
-    price: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
-    description: { type: DataTypes.TEXT, allowNull: true },
-    themeId: { type: DataTypes.INTEGER, allowNull: false },
-    createdBy: { type: DataTypes.STRING, allowNull: false, defaultValue: 'system' },
-    updatedBy: { type: DataTypes.STRING, allowNull: false, defaultValue: 'system' }
-  }, {
-    tableName: 'curriculums',
-    underscored: true,
+const curriculumSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    displayOrder: { type: Number, required: true, default: 1 },
+    price: { type: Number, required: true },
+    description: { type: String, default: null },
+    themeId: { type: mongoose.Schema.Types.ObjectId, ref: 'Theme', required: true },
+    createdBy: { type: String, required: true, default: 'system' },
+    updatedBy: { type: String, required: true, default: 'system' }
+  },
+  {
     timestamps: true
-  });
+  }
+);
 
-  return Curriculum;
-};
+module.exports = mongoose.models.Curriculum || mongoose.model('Curriculum', curriculumSchema);
