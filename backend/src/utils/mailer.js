@@ -1,10 +1,13 @@
 const nodemailer = require('nodemailer');
 
 async function sendActivationEmail({ to, activationLink }) {
+  // EN: Always print activation link for demo/testing visibility.
+  // FR: Affiche toujours le lien d'activation pour la démo et les tests.
+  console.log(`Activation link for ${to}: ${activationLink}`);
+
   // EN: Beginner-friendly fallback mailer that prints the activation link.
   // FR: Version débutant : si aucun SMTP n'est configuré, on affiche le lien dans la console.
   if (!process.env.SMTP_HOST) {
-    console.log(`Activation link for ${to}: ${activationLink}`);
     return;
   }
 

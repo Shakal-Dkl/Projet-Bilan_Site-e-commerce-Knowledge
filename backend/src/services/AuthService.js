@@ -11,7 +11,7 @@ class AuthService {
     // FR: Empêche les doublons de compte grâce à l'email unique.
     const existing = await userRepository.findByEmail(email);
     if (existing) {
-      throw new Error('Email already used');
+      throw new Error('Cet email est déjà utilisé');
     }
 
     // EN: Activation token is required before first login.
@@ -42,7 +42,7 @@ class AuthService {
     // FR: Active le compte à partir d'un token à usage unique.
     const user = await userRepository.findByActivationToken(token);
     if (!user) {
-      throw new Error('Invalid activation token');
+      throw new Error('Token d’activation invalide');
     }
 
     user.isActive = true;
@@ -57,16 +57,16 @@ class AuthService {
     // FR: La connexion vérifie à la fois le mot de passe et l'activation du compte.
     const user = await userRepository.findByEmail(email);
     if (!user) {
-      throw new Error('Invalid credentials');
+      throw new Error('Identifiants invalides');
     }
 
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) {
-      throw new Error('Invalid credentials');
+      throw new Error('Identifiants invalides');
     }
 
     if (!user.isActive) {
-      throw new Error('Account not activated');
+      throw new Error('Compte non activé');
     }
 
     // EN: JWT carries user id + role for route authorization.

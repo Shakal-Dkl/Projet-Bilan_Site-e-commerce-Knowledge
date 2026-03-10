@@ -36,12 +36,21 @@ import { AuthService } from '../core/auth.service';
     </div>
 
     <p class="knowledge-feedback knowledge-feedback-success" *ngIf="message">{{ message }}</p>
+    <p class="knowledge-feedback knowledge-feedback-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <div class="knowledge-card p-3 mt-3" *ngIf="activationLink">
+      <p class="knowledge-section-label">Activation</p>
+      <p class="mb-2">Ton lien d’activation est prêt :</p>
+      <a [href]="activationLink" target="_blank" rel="noopener">{{ activationLink }}</a>
+    </div>
   `
 })
 export class AuthPageComponent {
   // EN: Message area shared by register/login/logout actions.
   // FR: Zone de message partagée par inscription/connexion/déconnexion.
   message = '';
+  errorMessage = '';
+  activationLink = '';
 
   registerForm = {
     email: '',
@@ -57,14 +66,34 @@ export class AuthPageComponent {
 
   constructor(private readonly authService: AuthService) {}
 
+  private extractApiError(error: any, fallback: string) {
+    const directMessage = error?.error?.message;
+    if (directMessage) {
+      return directMessage;
+    }
+
+    const validationMessage = error?.error?.errors?.[0]?.msg;
+    if (validationMessage) {
+      return validationMessage;
+    }
+
+    return fallback;
+  }
+
   async register() {
     // EN: Creates account; activation link is shown in backend console (prototype mode).
     // FR: Crée le compte ; le lien d'activation est affiché dans la console backend (mode prototype).
     try {
-      await this.authService.register(this.registerForm);
-      this.message = 'Compte créé. Activez votre compte via le lien reçu (console backend).';
-    } catch {
-      this.message = 'Erreur pendant l’inscription.';
+      const result: any = await this.authService.register(this.registerForm);
+      this.errorMessage = '';
+      this.activationLink = result?.activationLink || '';
+      this.message = this.activationLink
+        ? 'Compte créé. Clique sur le lien ci-dessous pour activer ton compte.'
+        : 'Compte créé. Activez votre compte via le lien reçu (console backend).';
+    } catch (error: any) {
+      this.message = '';
+      this.activationLink = '';
+      this.errorMessage = this.extractApiError(error, 'Erreur pendant l’inscription.');
     }
   }
 
@@ -73,9 +102,11 @@ export class AuthPageComponent {
     // FR: Stocke le JWT et le rôle dans le localStorage via AuthService.
     try {
       await this.authService.login(this.loginForm);
+      this.errorMessage = '';
       this.message = 'Connexion réussie.';
-    } catch {
-      this.message = 'Erreur de connexion.';
+    } catch (error: any) {
+      this.message = '';
+      this.errorMessage = this.extractApiError(error, 'Erreur de connexion.');
     }
   }
 
@@ -83,6 +114,7 @@ export class AuthPageComponent {
     // EN: Clears local session from localStorage.
     // FR: Supprime la session locale du localStorage.
     this.authService.logout();
+    this.errorMessage = '';
     this.message = 'Déconnecté.';
   }
 }

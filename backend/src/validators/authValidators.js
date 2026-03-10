@@ -3,17 +3,17 @@ const { body, validationResult } = require('express-validator');
 const passwordRule = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,64}$/;
 
 const registerValidators = [
-  body('email').isEmail().withMessage('Invalid email'),
-  body('firstName').isLength({ min: 2 }).withMessage('First name too short'),
-  body('lastName').isLength({ min: 2 }).withMessage('Last name too short'),
+  body('email').isEmail().withMessage('Email invalide'),
+  body('firstName').isLength({ min: 2 }).withMessage('Le prénom doit contenir au moins 2 caractères'),
+  body('lastName').isLength({ min: 2 }).withMessage('Le nom doit contenir au moins 2 caractères'),
   body('password')
     .matches(passwordRule)
-    .withMessage('Password must contain upper/lower case, number, length 8-64')
+    .withMessage('Le mot de passe doit contenir une majuscule, une minuscule, un chiffre (8 à 64 caractères)')
 ];
 
 const loginValidators = [
-  body('email').isEmail().withMessage('Invalid email'),
-  body('password').notEmpty().withMessage('Password required')
+  body('email').isEmail().withMessage('Email invalide'),
+  body('password').notEmpty().withMessage('Mot de passe requis')
 ];
 
 function validate(req, res, next) {
