@@ -31,7 +31,12 @@ export class LessonPageComponent implements OnInit {
   constructor(private readonly route: ActivatedRoute, private readonly api: ApiService) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = this.route.snapshot.paramMap.get('id');
+    if (!id) {
+      this.message = 'Leçon introuvable.';
+      return;
+    }
+
     this.api.get(`/lessons/${id}`).subscribe({
       next: (result: any) => {
         this.lesson = result;
@@ -41,7 +46,7 @@ export class LessonPageComponent implements OnInit {
           const orderA = a.displayOrder ?? 999;
           const orderB = b.displayOrder ?? 999;
           if (orderA === orderB) {
-            return a.id - b.id;
+            return String(a.id).localeCompare(String(b.id));
           }
           return orderA - orderB;
         });
@@ -54,7 +59,11 @@ export class LessonPageComponent implements OnInit {
 
   async validateLesson() {
     try {
-      const id = Number(this.route.snapshot.paramMap.get('id'));
+      const id = this.route.snapshot.paramMap.get('id');
+      if (!id) {
+        this.message = 'Leçon introuvable.';
+        return;
+      }
       await this.api.post(`/lessons/${id}/validate`, {}, true);
       this.message = 'Leçon validée avec succès.';
     } catch {
