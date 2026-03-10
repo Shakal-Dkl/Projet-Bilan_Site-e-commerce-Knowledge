@@ -66,7 +66,7 @@ export class CatalogPageComponent implements OnInit {
     });
   }
 
-  async buyCurriculum(curriculumId: number) {
+  async buyCurriculum(curriculumId: string) {
     // EN: Sandbox purchase call for a full curriculum.
     // FR: Appel d'achat sandbox pour un cursus complet.
     try {
@@ -77,7 +77,7 @@ export class CatalogPageComponent implements OnInit {
     }
   }
 
-  async buyLesson(lessonId: number) {
+  async buyLesson(lessonId: string) {
     // EN: Sandbox purchase call for one lesson.
     // FR: Appel d'achat sandbox pour une seule leçon.
     try {
