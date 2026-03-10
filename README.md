@@ -51,6 +51,12 @@ npm run seed
 npm run start
 ```
 
+Sous PowerShell (Windows), utilisez:
+
+```powershell
+Copy-Item .env.example .env
+```
+
 API: `http://localhost:3000`
 
 ### 2) Frontend
@@ -110,7 +116,7 @@ Police: **Comic Sans MS**
 - Slides prêtes (version complète): [docs/slides-pretes-a-copier.md](docs/slides-pretes-a-copier.md)
 - Slides prêtes (version ultra simple 10 slides): [docs/slides-10-ultra-simple.md](docs/slides-10-ultra-simple.md)
 - Script oral minute par minute (10/15/30 min): [docs/script-oral-minute-par-minute.md](docs/script-oral-minute-par-minute.md)
-- Fiche antisèche 1 page: [docs/fiche-antisèche-oral-1-page.md](docs/fiche-antis%C3%A8che-oral-1-page.md)
+- Fiche antisèche 1 page: [docs/fiche-antisèche-oral-1-page.md](docs/fiche-antisèche-oral-1-page.md)
 - 10 phrases à mémoriser: [docs/10-phrases-a-memoriser.md](docs/10-phrases-a-memoriser.md)
 
 Pour obtenir une image PNG/JPG du MPD:
