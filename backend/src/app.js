@@ -18,7 +18,15 @@ app.use(cookieParser());
 // EN: CSRF protection is enabled outside test mode.
 // FR: La protection CSRF est activée hors mode test.
 if (env.ENABLE_CSRF) {
-  app.use(csurf({ cookie: { httpOnly: true, sameSite: 'lax' } }));
+  app.use(
+    csurf({
+      cookie: {
+        httpOnly: true,
+        sameSite: env.CSRF_COOKIE_SAMESITE,
+        secure: env.CSRF_COOKIE_SECURE
+      }
+    })
+  );
 }
 
 app.get('/api/health', (req, res) => {

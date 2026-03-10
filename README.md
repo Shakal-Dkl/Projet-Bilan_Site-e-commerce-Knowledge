@@ -109,20 +109,6 @@ Police: **Comic Sans MS**
 - Le paiement est simulé en mode **sandbox**.
 - L’activation email fonctionne en mode prototype via lien de console.
 
-## Livrables complémentaires générés
-
-- MPD (Mermaid): [docs/mpd-knowledge-learning.mmd](docs/mpd-knowledge-learning.mmd)
-- Plan de soutenance 30 min: [docs/plan-soutenance-30min.md](docs/plan-soutenance-30min.md)
-- Slides prêtes (version complète): [docs/slides-pretes-a-copier.md](docs/slides-pretes-a-copier.md)
-- Slides prêtes (version ultra simple 10 slides): [docs/slides-10-ultra-simple.md](docs/slides-10-ultra-simple.md)
-- Script oral minute par minute (10/15/30 min): [docs/script-oral-minute-par-minute.md](docs/script-oral-minute-par-minute.md)
-- Fiche antisèche 1 page: [docs/fiche-antisèche-oral-1-page.md](docs/fiche-antisèche-oral-1-page.md)
-- 10 phrases à mémoriser: [docs/10-phrases-a-memoriser.md](docs/10-phrases-a-memoriser.md)
-
-Pour obtenir une image PNG/JPG du MPD:
-1. Ouvrir le fichier Mermaid dans VS Code.
-2. Utiliser une extension Mermaid (ou mermaid.live) pour exporter en PNG.
-
 ## Déploiement gratuit (Render)
 
 ### 1) Préparer le dépôt
