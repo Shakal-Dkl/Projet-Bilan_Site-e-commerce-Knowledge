@@ -1,17 +1,19 @@
 process.env.NODE_ENV = 'test';
 process.env.ENABLE_CSRF = 'false';
+jest.setTimeout(180000);
 
 const bcrypt = require('bcryptjs');
 const request = require('supertest');
 const app = require('../src/app');
-const { sequelize, Theme, Curriculum, Lesson, User } = require('../src/models');
+const { connectDatabase, clearDatabase, disconnectDatabase, Theme, Curriculum, Lesson, User } = require('../src/models');
 
 describe('Purchase flow', () => {
   let token;
   let lesson;
 
   beforeAll(async () => {
-    await sequelize.sync({ force: true });
+    await connectDatabase();
+    await clearDatabase();
 
     const theme = await Theme.create({ name: 'Informatique' });
     const curriculum = await Curriculum.create({ title: 'Web', price: 60, themeId: theme.id });
@@ -41,7 +43,7 @@ describe('Purchase flow', () => {
   });
 
   afterAll(async () => {
-    await sequelize.close();
+    await disconnectDatabase();
   });
 
   it('allows buying a lesson and then validating it', async () => {

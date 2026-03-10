@@ -1,20 +1,19 @@
-const { DataTypes } = require('sequelize');
+const mongoose = require('mongoose');
 
-module.exports = (sequelize) => {
-  const LessonProgress = sequelize.define('LessonProgress', {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    userId: { type: DataTypes.INTEGER, allowNull: false },
-    lessonId: { type: DataTypes.INTEGER, allowNull: false },
-    isValidated: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
-    validatedAt: { type: DataTypes.DATE, allowNull: true },
-    createdBy: { type: DataTypes.STRING, allowNull: false, defaultValue: 'system' },
-    updatedBy: { type: DataTypes.STRING, allowNull: false, defaultValue: 'system' }
-  }, {
-    tableName: 'lesson_progress',
-    underscored: true,
-    timestamps: true,
-    indexes: [{ unique: true, fields: ['user_id', 'lesson_id'] }]
-  });
+const lessonProgressSchema = new mongoose.Schema(
+  {
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    lessonId: { type: mongoose.Schema.Types.ObjectId, ref: 'Lesson', required: true },
+    isValidated: { type: Boolean, required: true, default: true },
+    validatedAt: { type: Date, default: null },
+    createdBy: { type: String, required: true, default: 'system' },
+    updatedBy: { type: String, required: true, default: 'system' }
+  },
+  {
+    timestamps: true
+  }
+);
 
-  return LessonProgress;
-};
+lessonProgressSchema.index({ userId: 1, lessonId: 1 }, { unique: true });
+
+module.exports = mongoose.models.LessonProgress || mongoose.model('LessonProgress', lessonProgressSchema);

@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const { sequelize, Theme, Curriculum, Lesson, User } = require('../models');
+const { connectDatabase, disconnectDatabase, Theme, Curriculum, Lesson, User } = require('../models');
 
 const catalog = [
   {
@@ -83,7 +83,14 @@ const catalog = [
 ];
 
 async function seed() {
-  await sequelize.sync({ force: true });
+  await connectDatabase();
+
+  await Promise.all([
+    Theme.deleteMany({}),
+    Curriculum.deleteMany({}),
+    Lesson.deleteMany({}),
+    User.deleteMany({})
+  ]);
 
   for (const themeData of catalog) {
     const theme = await Theme.create({
@@ -131,10 +138,11 @@ async function seed() {
   });
 
   console.log('Seed completed successfully.');
+  await disconnectDatabase();
   process.exit(0);
 }
 
 seed().catch((error) => {
   console.error(error);
-  process.exit(1);
+  disconnectDatabase().finally(() => process.exit(1));
 });

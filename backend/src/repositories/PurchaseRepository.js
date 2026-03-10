@@ -1,4 +1,3 @@
-const { Op } = require('sequelize');
 const { Purchase } = require('../models');
 
 class PurchaseRepository {
@@ -7,21 +6,21 @@ class PurchaseRepository {
   }
 
   async hasCurriculumAccess(userId, curriculumId) {
-    const purchase = await Purchase.findOne({ where: { userId, curriculumId, paymentStatus: 'paid' } });
+    const purchase = await Purchase.findOne({ userId, curriculumId, paymentStatus: 'paid' });
     return Boolean(purchase);
   }
 
   async hasLessonAccess(userId, lessonId) {
-    const purchase = await Purchase.findOne({ where: { userId, lessonId, paymentStatus: 'paid' } });
+    const purchase = await Purchase.findOne({ userId, lessonId, paymentStatus: 'paid' });
     return Boolean(purchase);
   }
 
   async listByUser(userId) {
-    return Purchase.findAll({ where: { userId }, order: [['createdAt', 'DESC']] });
+    return Purchase.find({ userId }).sort({ createdAt: -1 });
   }
 
   async listAll() {
-    return Purchase.findAll({ where: { paymentStatus: { [Op.not]: null } }, order: [['createdAt', 'DESC']] });
+    return Purchase.find({ paymentStatus: { $ne: null } }).sort({ createdAt: -1 });
   }
 }
 

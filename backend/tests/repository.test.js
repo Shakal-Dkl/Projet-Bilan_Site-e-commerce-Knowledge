@@ -1,16 +1,18 @@
 process.env.NODE_ENV = 'test';
+jest.setTimeout(180000);
 
 const bcrypt = require('bcryptjs');
-const { sequelize } = require('../src/models');
+const { connectDatabase, clearDatabase, disconnectDatabase } = require('../src/models');
 const userRepository = require('../src/repositories/UserRepository');
 
 describe('User repository tests', () => {
   beforeAll(async () => {
-    await sequelize.sync({ force: true });
+    await connectDatabase();
+    await clearDatabase();
   });
 
   afterAll(async () => {
-    await sequelize.close();
+    await disconnectDatabase();
   });
 
   it('creates and reads a user', async () => {

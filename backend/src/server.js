@@ -1,9 +1,9 @@
 const app = require('./app');
 const env = require('./config/env');
-const { sequelize } = require('./models');
+const { connectDatabase } = require('./models');
 
 async function start() {
-  await sequelize.sync();
+  await connectDatabase();
   app.listen(env.PORT, () => {
     console.log(`API running on http://localhost:${env.PORT}`);
   });

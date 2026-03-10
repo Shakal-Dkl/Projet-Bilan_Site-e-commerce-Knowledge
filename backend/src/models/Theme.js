@@ -1,17 +1,15 @@
-const { DataTypes } = require('sequelize');
+const mongoose = require('mongoose');
 
-module.exports = (sequelize) => {
-  const Theme = sequelize.define('Theme', {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    name: { type: DataTypes.STRING, allowNull: false, unique: true },
-    displayOrder: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 1 },
-    createdBy: { type: DataTypes.STRING, allowNull: false, defaultValue: 'system' },
-    updatedBy: { type: DataTypes.STRING, allowNull: false, defaultValue: 'system' }
-  }, {
-    tableName: 'themes',
-    underscored: true,
+const themeSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true, unique: true },
+    displayOrder: { type: Number, required: true, default: 1 },
+    createdBy: { type: String, required: true, default: 'system' },
+    updatedBy: { type: String, required: true, default: 'system' }
+  },
+  {
     timestamps: true
-  });
+  }
+);
 
-  return Theme;
-};
+module.exports = mongoose.models.Theme || mongoose.model('Theme', themeSchema);

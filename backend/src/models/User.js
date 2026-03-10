@@ -1,22 +1,20 @@
-const { DataTypes } = require('sequelize');
+const mongoose = require('mongoose');
 
-module.exports = (sequelize) => {
-  const User = sequelize.define('User', {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    email: { type: DataTypes.STRING, allowNull: false, unique: true, validate: { isEmail: true } },
-    passwordHash: { type: DataTypes.STRING, allowNull: false },
-    firstName: { type: DataTypes.STRING, allowNull: false },
-    lastName: { type: DataTypes.STRING, allowNull: false },
-    role: { type: DataTypes.ENUM('admin', 'client', 'other'), allowNull: false, defaultValue: 'client' },
-    isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
-    activationToken: { type: DataTypes.STRING, allowNull: true, unique: true },
-    createdBy: { type: DataTypes.STRING, allowNull: false, defaultValue: 'system' },
-    updatedBy: { type: DataTypes.STRING, allowNull: false, defaultValue: 'system' }
-  }, {
-    tableName: 'users',
-    underscored: true,
+const userSchema = new mongoose.Schema(
+  {
+    email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+    passwordHash: { type: String, required: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    role: { type: String, enum: ['admin', 'client', 'other'], required: true, default: 'client' },
+    isActive: { type: Boolean, required: true, default: false },
+    activationToken: { type: String, default: null },
+    createdBy: { type: String, required: true, default: 'system' },
+    updatedBy: { type: String, required: true, default: 'system' }
+  },
+  {
     timestamps: true
-  });
+  }
+);
 
-  return User;
-};
+module.exports = mongoose.models.User || mongoose.model('User', userSchema);

@@ -1,20 +1,19 @@
-const { DataTypes } = require('sequelize');
+const mongoose = require('mongoose');
 
-module.exports = (sequelize) => {
-  const Certification = sequelize.define('Certification', {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-    userId: { type: DataTypes.INTEGER, allowNull: false },
-    themeId: { type: DataTypes.INTEGER, allowNull: false },
-    title: { type: DataTypes.STRING, allowNull: false },
-    issuedAt: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW },
-    createdBy: { type: DataTypes.STRING, allowNull: false, defaultValue: 'system' },
-    updatedBy: { type: DataTypes.STRING, allowNull: false, defaultValue: 'system' }
-  }, {
-    tableName: 'certifications',
-    underscored: true,
-    timestamps: true,
-    indexes: [{ unique: true, fields: ['user_id', 'theme_id'] }]
-  });
+const certificationSchema = new mongoose.Schema(
+  {
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    themeId: { type: mongoose.Schema.Types.ObjectId, ref: 'Theme', required: true },
+    title: { type: String, required: true },
+    issuedAt: { type: Date, required: true, default: Date.now },
+    createdBy: { type: String, required: true, default: 'system' },
+    updatedBy: { type: String, required: true, default: 'system' }
+  },
+  {
+    timestamps: true
+  }
+);
 
-  return Certification;
-};
+certificationSchema.index({ userId: 1, themeId: 1 }, { unique: true });
+
+module.exports = mongoose.models.Certification || mongoose.model('Certification', certificationSchema);

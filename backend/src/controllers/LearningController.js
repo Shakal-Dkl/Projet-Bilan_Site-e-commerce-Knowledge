@@ -3,7 +3,7 @@ const progressService = require('../services/ProgressService');
 class LearningController {
   async validateLesson(req, res) {
     try {
-      const result = await progressService.validateLesson(req.user, Number(req.params.lessonId));
+      const result = await progressService.validateLesson(req.user, req.params.lessonId);
       return res.status(200).json(result);
     } catch (error) {
       return res.status(400).json({ message: error.message });

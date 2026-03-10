@@ -1,17 +1,19 @@
 process.env.NODE_ENV = 'test';
 process.env.ENABLE_CSRF = 'false';
+jest.setTimeout(180000);
 
 const request = require('supertest');
 const app = require('../src/app');
-const { sequelize, User } = require('../src/models');
+const { connectDatabase, clearDatabase, disconnectDatabase, User } = require('../src/models');
 
 describe('Auth flow', () => {
   beforeAll(async () => {
-    await sequelize.sync({ force: true });
+    await connectDatabase();
+    await clearDatabase();
   });
 
   afterAll(async () => {
-    await sequelize.close();
+    await disconnectDatabase();
   });
 
   it('registers, activates and logs in a user', async () => {
@@ -24,7 +26,7 @@ describe('Auth flow', () => {
 
     expect(registerResponse.status).toBe(201);
 
-    const user = await User.findOne({ where: { email: 'student@test.com' } });
+    const user = await User.findOne({ email: 'student@test.com' });
     expect(user).toBeTruthy();
     expect(user.role).toBe('client');
     expect(user.isActive).toBe(false);
