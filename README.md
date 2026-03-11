@@ -113,7 +113,7 @@ Police: **Comic Sans MS**
 
 ### 1) Préparer le dépôt
 
-- Pousser le projet sur GitHub (repo public recommandé pour la correction).
+- Pousser le projet sur GitHub.
 - Vérifier que `backend` et `frontend` sont bien dans le repo.
 
 ### 2) Déployer le backend (Render Web Service)
