@@ -8,7 +8,7 @@ import { ApiService } from '../core/api.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <h2 class="knowledge-page-title">Espace leçon</h2>
+    <h1 class="knowledge-page-title">Espace leçon</h1>
 
     <div *ngIf="lesson" class="knowledge-card p-4">
       <p class="knowledge-section-label">Contenu acheté</p>

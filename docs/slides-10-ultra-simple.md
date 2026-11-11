@@ -8,7 +8,7 @@
 ### À afficher
 - Knowledge Learning
 - Projet e-learning / e-commerce
-- Angular + Node.js + SQLite
+- Angular + Node.js + MongoDB
 
 ### À dire
 Je présente mon projet Knowledge Learning, une plateforme e-learning avec logique e-commerce.
@@ -43,7 +43,7 @@ J’ai implémenté toutes les fonctionnalités principales demandées dans le s
 ### À afficher
 - Front: Angular + Bootstrap + SCSS
 - Back: Node.js / Express
-- BDD: SQLite + Sequelize
+- BDD: MongoDB + Mongoose
 
 ### À dire
 J’ai choisi une stack simple et adaptée à un projet de niveau débutant.

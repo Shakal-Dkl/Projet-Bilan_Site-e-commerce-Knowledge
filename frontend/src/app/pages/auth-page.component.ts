@@ -8,7 +8,7 @@ import { AuthService } from '../core/auth.service';
   standalone: true,
   imports: [FormsModule, CommonModule],
   template: `
-    <h2 class="knowledge-page-title">Connexion et inscription</h2>
+    <h1 class="knowledge-page-title">Connexion et inscription</h1>
 
     <div class="row g-4">
       <div class="col-md-6">

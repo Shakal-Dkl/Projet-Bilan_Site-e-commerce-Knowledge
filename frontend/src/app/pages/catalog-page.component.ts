@@ -8,7 +8,7 @@ import { ApiService } from '../core/api.service';
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
-    <h2 class="knowledge-page-title">Catalogue des formations</h2>
+    <h1 class="knowledge-page-title">Catalogue des formations</h1>
     <p class="knowledge-muted">Le catalogue est visible sans connexion.</p>
     <p class="knowledge-feedback knowledge-feedback-error" *ngIf="!isConnected">
       Connecte-toi pour acheter un cursus ou une leçon.

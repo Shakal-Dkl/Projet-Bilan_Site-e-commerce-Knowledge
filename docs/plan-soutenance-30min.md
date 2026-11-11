@@ -3,7 +3,7 @@
 ## Slide 1 - Titre (1 min)
 - Projet: Knowledge Learning (plateforme e-learning/e-commerce)
 - Nom, formation, date
-- Stack: Angular + Bootstrap/SCSS + Node.js + SQLite
+- Stack: Angular + Bootstrap/SCSS + Node.js + Express + MongoDB (Mongoose)
 
 ## Slide 2 - Contexte & besoin métier (2 min)
 - Entreprise fictive: éditeur de contenus de formation
@@ -21,24 +21,24 @@
 - Architecture 3-tiers MVC
 - Frontend (Angular)
 - Backend API (Express)
-- Data layer (Sequelize + SQLite)
+- Data layer (MongoDB + Mongoose)
 - Pourquoi ce choix: simplicité, maintenabilité, lisibilité débutant
 
 ## Slide 5 - Modèle physique de données (4 min)
 - Présenter le MPD: [mpd-knowledge-learning.mmd](mpd-knowledge-learning.mmd)
-- Entités: users, themes, curriculums, lessons, purchases, lesson_progress, certifications
+- Collections/modèles: User, Theme, Curriculum, Lesson, Purchase, LessonProgress, Certification
 - Cardinalités clés
-- Champs de traçabilité: created_at, updated_at, created_by, updated_by
+- Champs de traçabilité: createdAt, updatedAt, createdBy, updatedBy
 
 ## Slide 6 - Mise en place BDD (2 min)
-- ORM Sequelize
-- Synchronisation tables
+- ODM Mongoose
+- Connexion MongoDB + schémas
 - Seed des données de la version bêta
 - Compte admin initial
 
 ## Slide 7 - Composants d’accès aux données (3 min)
 - Pattern Repository: UserRepository, CatalogRepository, PurchaseRepository, ProgressRepository
-- Avantage: séparation logique métier / accès SQL
+- Avantage: séparation logique métier / accès MongoDB
 - Exemples de méthodes critiques
 
 ## Slide 8 - Logique métier & e-commerce (4 min)

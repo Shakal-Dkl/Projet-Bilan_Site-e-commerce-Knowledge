@@ -2,7 +2,7 @@
 
 1. Je présente **Knowledge Learning**, une plateforme e-learning avec une logique e-commerce.
 2. Le projet répond au besoin: inscription, activation, connexion, achat, accès aux leçons et certifications.
-3. J’ai choisi Angular pour le front, Node.js/Express pour le back, et SQLite/Sequelize pour la base.
+3. J’ai choisi Angular pour le front, Node.js/Express pour le back, et MongoDB/Mongoose pour la base.
 4. Mon architecture est MVC 3-tiers: controllers, services, repositories, models.
 5. Les mots de passe sont hashés avec bcrypt et l’authentification se fait par JWT.
 6. J’ai ajouté un middleware CSRF et des contrôles d’accès par rôle admin/client.

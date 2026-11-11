@@ -6,7 +6,7 @@ Je présente **Knowledge Learning**, une plateforme e-learning/e-commerce. Le pr
 ## 2) Stack technique (à dire en 15 secondes)
 - Frontend: Angular + Bootstrap + SCSS
 - Backend: Node.js + Express
-- Base de données: SQLite + Sequelize
+- Base de données: MongoDB + Mongoose
 - Auth/Sécurité: JWT, bcrypt, CSRF
 
 ## 3) Fonctionnalités clés (à citer vite)
@@ -27,8 +27,8 @@ Architecture **MVC 3-tiers** :
 - Models = schéma de base
 
 ## 5) Base de données (ce que le jury veut entendre)
-Tables principales: `users`, `themes`, `curriculums`, `lessons`, `purchases`, `lesson_progress`, `certifications`.
-Chaque table inclut: `created_at`, `updated_at`, `created_by`, `updated_by`.
+Collections/modèles principaux: `User`, `Theme`, `Curriculum`, `Lesson`, `Purchase`, `LessonProgress`, `Certification`.
+Chaque modèle inclut: `createdAt`, `updatedAt`, `createdBy`, `updatedBy`.
 
 ## 6) Sécurité (mots-clés)
 - Mot de passe hashé (bcrypt)
@@ -62,8 +62,8 @@ Chaque table inclut: `created_at`, `updated_at`, `created_by`, `updated_by`.
 Le projet répond au cahier des charges avec un backend structuré, sécurisé et testé, et un frontend volontairement minimaliste mais fonctionnel.
 
 ## 12) Questions pièges + réponses très courtes
-**Pourquoi SQLite ?**
-Prototype local simple et rapide.
+**Pourquoi MongoDB ?**
+Modèle document souple, rapide à prototyper avec Mongoose.
 
 **Pourquoi MVC ?**
 Séparation claire des responsabilités.

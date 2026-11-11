@@ -8,7 +8,7 @@
 ### Contenu diapo
 - Knowledge Learning
 - Projet e-learning / e-commerce
-- Angular + Node.js + SQLite
+- Angular + Node.js + MongoDB
 - Nom / Date
 
 ### Notes orales
@@ -44,7 +44,7 @@ J’ai implémenté toutes les fonctionnalités principales demandées dans le s
 ### Contenu diapo
 - Frontend: Angular + Bootstrap + SCSS
 - Backend: Node.js / Express
-- DB: SQLite + Sequelize ORM
+- DB: MongoDB + Mongoose
 - API REST + JWT
 
 ### Notes orales
@@ -57,7 +57,7 @@ J’ai choisi une stack simple, adaptée à un niveau débutant, mais structuré
 - Controllers: entrées HTTP
 - Services: logique métier
 - Repositories: accès données
-- Models: structure BDD
+- Models: schémas Mongoose
 
 ### Notes orales
 L’application suit une architecture 3-tiers de type MVC. Les contrôleurs ne contiennent pas de logique complexe, celle-ci est dans les services, et l’accès à la base est isolé dans les repositories.
@@ -68,7 +68,7 @@ L’application suit une architecture 3-tiers de type MVC. Les contrôleurs ne c
 ### Contenu diapo
 - Entités: users, themes, curriculums, lessons
 - Entités métier: purchases, lesson_progress, certifications
-- Traçabilité: created_at, updated_at, created_by, updated_by
+- Traçabilité: createdAt, updatedAt, createdBy, updatedBy
 
 ### Notes orales
 Le modèle couvre les besoins e-learning et e-commerce. J’ai aussi ajouté les champs de traçabilité demandés dans la grille d’évaluation.

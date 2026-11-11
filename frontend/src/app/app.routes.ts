@@ -8,9 +8,9 @@ import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
 	{ path: '', redirectTo: 'catalog', pathMatch: 'full' },
-	{ path: 'auth', component: AuthPageComponent },
-	{ path: 'catalog', component: CatalogPageComponent },
-	{ path: 'lessons/:id', component: LessonPageComponent },
-	{ path: 'certifications', component: CertificationsPageComponent },
-	{ path: 'admin', component: AdminPageComponent, canActivate: [adminGuard] }
+	{ path: 'auth', component: AuthPageComponent, title: 'Connexion | Knowledge Learning' },
+	{ path: 'catalog', component: CatalogPageComponent, title: 'Catalogue | Knowledge Learning' },
+	{ path: 'lessons/:id', component: LessonPageComponent, title: 'Leçon | Knowledge Learning' },
+	{ path: 'certifications', component: CertificationsPageComponent, title: 'Certifications | Knowledge Learning' },
+	{ path: 'admin', component: AdminPageComponent, canActivate: [adminGuard], title: 'Backoffice | Knowledge Learning' }
 ];

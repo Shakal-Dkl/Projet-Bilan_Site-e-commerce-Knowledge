@@ -3,10 +3,18 @@ const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const csurf = require('csurf');
+const rateLimit = require('express-rate-limit');
 const env = require('./config/env');
 const routes = require('./routes');
 
 const app = express();
+const authRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many authentication attempts. Please retry later.' }
+});
 
 // EN: Global security and parsing middlewares.
 // FR: Middlewares globaux de sécurité et de parsing.
@@ -14,6 +22,7 @@ app.use(helmet());
 app.use(cors({ origin: env.FRONTEND_URL, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use('/api/auth', authRateLimiter);
 
 // EN: CSRF protection is enabled outside test mode.
 // FR: La protection CSRF est activée hors mode test.

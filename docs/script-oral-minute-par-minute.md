@@ -12,13 +12,13 @@ Le contexte est celui d’une entreprise qui vendait déjà des contenus de form
 Les fonctionnalités livrées sont: inscription, activation de compte par email, connexion, achat de leçon ou de cursus, accès conditionné à l’achat, validation des leçons et affichage des certifications obtenues.
 
 ### Minute 3 à 4 — Stack technique
-Pour le frontend j’ai utilisé Angular avec Bootstrap et SCSS. Pour le backend: Node.js avec Express. Pour la base de données: SQLite avec Sequelize. Le projet est organisé en architecture MVC 3-tiers.
+Pour le frontend j’ai utilisé Angular avec Bootstrap et SCSS. Pour le backend: Node.js avec Express. Pour la base de données: MongoDB avec Mongoose. Le projet est organisé en architecture MVC 3-tiers.
 
 ### Minute 4 à 5 — Architecture du code
 Les contrôleurs gèrent les requêtes HTTP. Les services portent la logique métier. Les repositories isolent l’accès aux données. Cette séparation rend le code plus clair et plus maintenable.
 
 ### Minute 5 à 6 — Base de données
-Le modèle contient les tables users, themes, curriculums, lessons, purchases, lesson_progress et certifications. J’ai ajouté les champs de traçabilité demandés: created_at, updated_at, created_by, updated_by.
+Le modèle contient les collections users, themes, curriculums, lessons, purchases, lesson_progress et certifications. J’ai ajouté les champs de traçabilité demandés: createdAt, updatedAt, createdBy, updatedBy.
 
 ### Minute 6 à 7 — Sécurité
 Les mots de passe sont hashés avec bcrypt. L’authentification se fait avec JWT. Le contrôle d’accès se fait par rôle admin/client. J’ai aussi ajouté une protection CSRF côté backend et une politique de validation du mot de passe.
@@ -90,24 +90,24 @@ Je montre le parcours complet:
 ### Minute 10 à 14 — Choix technologiques
 Frontend Angular + Bootstrap + SCSS pour une interface simple.
 Backend Node.js + Express pour l’API.
-Sequelize + SQLite pour la persistance.
+Mongoose + MongoDB pour la persistance.
 Ces choix me permettent une implémentation lisible, rapide et cohérente avec un projet pédagogique.
 
 ### Minute 14 à 18 — Architecture logicielle
 Structure en couches:
 - controllers pour les routes et la réponse HTTP
 - services pour la logique métier
-- repositories pour l’accès aux tables
+- repositories pour l’accès aux données
 - models pour les entités
 Cette structure répond à la demande d’organisation propre du code.
 
 ### Minute 18 à 22 — Modèle de données et règles métier
-Tables principales: users, themes, curriculums, lessons, purchases, lesson_progress, certifications.
+Collections principales: users, themes, curriculums, lessons, purchases, lesson_progress, certifications.
 Règles:
 - achat de cursus = accès aux leçons du cursus
 - achat de leçon = accès à la leçon
 - validation de toutes les leçons d’un thème = certification
-Traçabilité ajoutée avec created_at/updated_at et created_by/updated_by.
+Traçabilité ajoutée avec createdAt/updatedAt et createdBy/updatedBy.
 
 ### Minute 22 à 25 — Sécurité
 - Password hashé en base (bcrypt)
@@ -135,8 +135,8 @@ Le projet respecte les exigences fonctionnelles et techniques. Je suis prêt à 
 
 ## Questions probables du jury + réponses courtes
 
-### Pourquoi avoir choisi SQLite ?
-Pour un prototype local simple à déployer et à évaluer rapidement.
+### Pourquoi avoir choisi MongoDB ?
+Pour un prototype rapide avec un modèle document flexible et une intégration fluide via Mongoose.
 
 ### Pourquoi MVC 3-tiers ?
 Pour séparer clairement les responsabilités et faciliter la maintenance.
@@ -148,4 +148,4 @@ JWT, bcrypt, CSRF, validation des entrées, contrôle par rôle.
 Exécution des suites backend avec résultats passants.
 
 ### Que feriez-vous en production ?
-PostgreSQL/MySQL, provider paiement réel, SMTP réel, CI/CD, logs et monitoring.
+Cluster MongoDB managé, provider paiement réel, SMTP réel, CI/CD, logs et monitoring.

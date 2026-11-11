@@ -14,7 +14,7 @@ type ThemeCertificationCard = {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <h2 class="knowledge-page-title">Mes certifications</h2>
+    <h1 class="knowledge-page-title">Mes certifications</h1>
 
     <p class="knowledge-muted mb-3">Voici les certifications disponibles pour chaque thème.</p>
 

@@ -7,7 +7,7 @@ import { ApiService } from '../core/api.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <h2 class="knowledge-page-title">Backoffice Admin</h2>
+    <h1 class="knowledge-page-title">Backoffice Admin</h1>
 
     <div class="row g-3">
       <div class="col-md-6">
